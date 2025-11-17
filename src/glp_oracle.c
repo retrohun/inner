@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -488,7 +488,7 @@ void get_oracle_stat(int *callno,int *roundno,unsigned long *time, const char**v
     while(*from && cnt<80){ cnt++; *to=*from; to++; from++; }
     from=glp_version();
     while(*from && cnt<80){ cnt++; *to=*from; to++; from++; }
-    *version=&verstr[0];
+    *to=0; *version=&verstr[0];
 }
 
 /* EOF */
