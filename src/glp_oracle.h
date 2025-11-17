@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -73,9 +73,9 @@ int ask_oracle(void);
 *
 * void get_oracle_stat(&callno, &roundno, &time)
 *    return the number of oracle calls, total number of iterations,
-*    and the used time in 0.01 seconds.
+*    the used time in 0.01 seconds, and oracle version string
 */
-void get_oracle_stat(int *callno,int *roundno,unsigned long *time);
+void get_oracle_stat(int *callno,int *roundno,unsigned long *time,const char **version);
 
 /* EOF */
 

@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -44,6 +44,10 @@ static inline void round_to(double *v)
     if(-4.0*ROUND_EPS<iip && iip<4.0*ROUND_EPS){ *v=ip+1.0/(ip2+1.0/ip3); return; }
     v2=1.0/iip; ip4=intfloor(v2); iip=v2-ip4;
     if(-8.0*ROUND_EPS<iip && iip<8.0*ROUND_EPS){ *v=ip+1.0/(ip2+1.0/(ip3+1.0/ip4)); return;}
+    // check the next iteration
+    v2=1.0/iip;
+    ip=ip+1.0/(ip2+1.0/(ip3+1.0/(ip4+1.0/intfloor(v2)))); iip=*v-ip;
+    if(-ROUND_EPS<iip && iip < ROUND_EPS){ *v=ip; return; }
 }
 
 #undef ROUND_EPS

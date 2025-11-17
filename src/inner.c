@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -21,6 +21,7 @@
 #include "params.h"
 #include "poly.h"
 #include "glp_oracle.h"
+#include "version.h"
 
 /*********************************************************************
 * Miscellaneous: initialize random; get elapsed time, nice printing
@@ -252,9 +253,11 @@ static void dump_and_save(int how)
     }
     if(PARAMS(PrintStatistics)){ /* statistics, only if not quiet */
       int oraclecalls,oraclerounds; unsigned long oracletime;
-      get_oracle_stat(&oraclecalls,&oraclerounds,&oracletime);
+      const char *oracleversion;
+      get_oracle_stat(&oraclecalls,&oraclerounds,&oracletime,&oracleversion);
       report(R_txt,"\n" DASHSEP "\n"
       "Problem %s\n"
+      " algorithm               " PROGNAME " " mkstringof(VERSION_MAJOR.VERSION_MINOR) " %s\n"
       " name                    %s\n"
       " output                  %s\n"
       "%s%s%s"
@@ -262,6 +265,7 @@ static void dump_and_save(int how)
       " rows, cols, objs        %d, %d, %d\n"
       " vertices, facets        %d, %d\n",
       how==0 ? "completed" : how<=2 ? "aborted with error" : "interrupted",
+      oracleversion,
       PARAMS(ProblemName),
       PARAMS(SaveFile) ? PARAMS(SaveFile) : 
         PARAMS(SaveVertexFile)||PARAMS(SaveFacetFile) ? "" : "[none]",

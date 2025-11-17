@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -240,7 +240,6 @@ M_FacetPosnegList,		/* indices of positive/negative facets; FacetPosnegList */
 		/* threads write these */
 M_THREAD_SLOTS,
 M_VertexList=M_THREAD_SLOTS,	/* adjacency list of vertices in the intersection of two facets */
-//M_FacetWork,			/* facet bitmap; FacetWork */
 M_VertexArray,			/* calculating facet equations; VertexArray */
 M_NewFacetCoordStore,		/* new facet coordinates */
 M_NewFacetAdjStore,		/* adjacency list of new facets */
@@ -270,7 +269,6 @@ M_MSLOTSTOTAL			/* total number of managed memory */
 #define TM_FacetDistStore	"FacetDist"
 #define TM_FacetPosnegList	"FacetSign"
 #define TM_VertexList		"VertexList"
-//#define TM_FacetWork		"FacetWork"
 #define TM_VertexArray		"VertexArray"
 #define TM_NewFacetCoordStore	"NewFacetCoord"
 #define TM_NewFacetAdjStore	"NewFacetAdj"
@@ -1614,7 +1612,6 @@ static void compress_facets(void)
 /* void request main loop memory(threadId) */
 inline static void request_main_loop_memory(int threadId)
 {   talloc2(BITMAP_t*,M_VertexList,threadId,MaxVertices,1);
-//    talloc2(BITMAP_t,M_FacetWork,threadId,1,FacetBitmapBlockSize);
     talloc2(double,M_NewFacetCoordStore,threadId,DD_INITIAL_FACETNO,FacetSize);
     talloc2(BITMAP_t,M_NewFacetAdjStore,threadId,DD_INITIAL_FACETNO,VertexBitmapBlockSize);
     NewFacet[threadId]=0;

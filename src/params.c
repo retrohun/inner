@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -64,16 +64,6 @@
 #define DEF_PrintFacets		0	/* don't report */
 #define DEF_SaveVertices	2	/* partial */
 #define DEF_SaveFacets		1	/* on normal exit only */
-/* name of this program */
-#ifndef PROG
-  #ifdef USETHREADS
-    #define PROG		innerth
-  #else
-    #define PROG		inner
-  #endif
-#endif
-#define PROGNAME		mkstringof(PROG)
-
 struct params_t GlobalParams;
 
 /***********************************************************************
@@ -473,8 +463,8 @@ static void signal_help(void) {printf(
 "  `--resume=' option. The snapshot file name is determined as follows.\n"
 "  If a checkpoint stub was defined after the `-oc' option, then\n"
 "  '000.dmp' is appended to the stub. Otherwise the extension of the\n"
-"  output file specified after option `-c' is replaced by '.dmp'. No\n"
-"  snapshot file is written if neither `-oc' nor `-c' option is found.\n"
+"  output file specified after option `-o' is replaced by '.dmp'. No\n"
+"  snapshot file is written if neither `-oc' nor `-o' option is found.\n"
 "  Subsequent " mkstringof(DUMP_SIGNAL) " signals overwrite the same file.\n"
 "Signals take effect only after completing a full iteration. The only way\n"
 "to interrupt an iteration is to kill the program.\n"

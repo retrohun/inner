@@ -1,3 +1,8 @@
+Version 3.2
+   - inner.c: improving reporting
+   - round.h: adding one more level to the continued fraction rounding algorithm
+   - poly.c: some cleanup
+
 Version 3.1
    - poly.c: improving the ridge checking routine. The intersection with
      FacetLiving is computed on the fly, saving the FacetWork slot. Storing

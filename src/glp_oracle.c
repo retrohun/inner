@@ -3,7 +3,7 @@
 /***********************************************************************
  * This code is part of INNER, a linear multiobjective problem solver.
  *
- * Copyright (C) 2016-2024 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
+ * Copyright (C) 2016-2025 Laszlo Csirmaz, https://github.com/lcsirmaz/inner
  *
  * This program is free, open-source software. You may redistribute it
  * and/or modify under the terms of the GNU General Public License (GPL).
@@ -480,9 +480,15 @@ int ask_oracle(void)
 *   number of LP calls, iterations, total time spent by LP 
 */
 
-void get_oracle_stat(int *callno,int *roundno,unsigned long *time)
-{   *callno=oracle_calls; *roundno=glp_get_it_cnt(P);
+void get_oracle_stat(int *callno,int *roundno,unsigned long *time, const char**version)
+{static char verstr[81]; const char *from; char *to; int cnt;
+    *callno=oracle_calls; *roundno=glp_get_it_cnt(P);
     *time=(oracle_time+5ul)/10ul; // in 0.01 seconds
+    cnt=0; to=&verstr[0]; from="using patched glpk-";
+    while(*from && cnt<80){ cnt++; *to=*from; to++; from++; }
+    from=glp_version();
+    while(*from && cnt<80){ cnt++; *to=*from; to++; from++; }
+    *version=&verstr[0];
 }
 
 /* EOF */
